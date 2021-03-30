@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'my-maven' 
+    }
+    stage ('Clone') {
+            steps {
+                git branch: 'master', url: "https://github.com/mromdhani/mywebappsecurity.git"
+        }
+
+      }
+       stage('Build & Unit test'){
+          steps {
+               sh 'mvn clean package';
+               junit '**/target/surefire-reports/TEST-*.xml'
+              //    archiveArtifacts  'target/*.jar'
+           }
+       }
+       stage('Security SAST : SonarQube'){
+           steps {
+                 bat "mvn sonar:sonar  -Dsonar.host.url=http://host.docker.internal:9000  -Dsonar.projectName=mywebappsecurity -Dsonar.projectKey=mywebappsecurity -Dsonar.projectVersion=$BUILD_NUMBER";
+           }
+        }
+    }
+}
