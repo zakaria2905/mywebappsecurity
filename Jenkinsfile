@@ -20,7 +20,7 @@ pipeline {
        }
        stage('Security SAST : SonarQube'){
            steps {
-                 bat "mvn sonar:sonar  -Dsonar.host.url=http://host.docker.internal:9000  -Dsonar.projectName=mywebappsecurity -Dsonar.projectKey=mywebappsecurity -Dsonar.projectVersion=$BUILD_NUMBER";
+                 sh "mvn sonar:sonar  -Dsonar.host.url=http://host.docker.internal:9000  -Dsonar.projectName=mywebappsecurity -Dsonar.projectKey=mywebappsecurity -Dsonar.projectVersion=$BUILD_NUMBER";
            }
         }
     }
