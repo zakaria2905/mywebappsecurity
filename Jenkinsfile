@@ -4,12 +4,13 @@ pipeline {
     tools {
         maven 'my-maven' 
     }
-    stage ('Clone') {
+    stages {
+       stage ('Clone') {
             steps {
                 git branch: 'master', url: "https://github.com/zakaria2905/mywebappsecurity.git"
-        }
+            }
 
-      }
+        }
        stage('Build & Unit test'){
           steps {
                sh 'mvn clean package';
@@ -23,3 +24,4 @@ pipeline {
            }
         }
     }
+}
