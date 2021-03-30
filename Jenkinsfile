@@ -6,7 +6,7 @@ pipeline {
     }
     stage ('Clone') {
             steps {
-                git branch: 'master', url: "https://github.com/mromdhani/mywebappsecurity.git"
+                git branch: 'master', url: "https://github.com/zakaria2905/mywebappsecurity.git"
         }
 
       }
